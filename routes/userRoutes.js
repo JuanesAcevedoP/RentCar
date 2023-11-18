@@ -5,7 +5,7 @@ const UserController = require('../controllers/userController');
 // Definir rutas CRUD para usuarios
 router.get('/', UserController.getAllUsers);
 router.post('/', UserController.createUser);
-router.get('/:id', UserController.getUserById);
+router.get('/:username/:password', UserController.getUser);
 router.put('/:id', UserController.updateUser);
 router.delete('/:id', UserController.deleteUser);
 

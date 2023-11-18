@@ -38,20 +38,22 @@ const UserController = {
         }
     },
 
-    getUserById: async (req, res) => {
-        const userId = req.params.id;
 
-        try {
-            const user = await User.findById(userId);
-            if (!user) {
-                return res.status(404).json({ error: 'Usuario no encontrado' });
-            }
+    getUser: async (req, res) => {
+    const { username, password } = req.params;
 
-            res.json(user);
-        } catch (error) {
-            res.status(500).json({ error: error.message });
+    try {
+        const user = await User.findOne({ username, password });
+
+        if (!user) {
+            return res.status(404).json({ error: 'Usuario no encontrado por nombre de usuario y contraseña' });
         }
-    },
+
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+},
 
     updateUser: async (req, res) => {
         const userId = req.params.id;
